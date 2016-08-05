@@ -53,7 +53,7 @@ class RecipeHasInput extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdInput0()
+    public function getInput()
     {
         return $this->hasOne(Input::className(), ['idInput' => 'idInput']);
     }
@@ -61,7 +61,7 @@ class RecipeHasInput extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdRecipe0()
+    public function getRecipe()
     {
         return $this->hasOne(Recipe::className(), ['idPreparedInput' => 'idPreparedInput']);
     }

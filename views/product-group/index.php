@@ -18,17 +18,36 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create Product Group'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    
+    <?php
+    
+    $requestAutorization = "";
+	/*if($model->requestAutorization == 0)
+		$requestAutorization = "No";
+    else
+        $requestAutorization = "Sí";
+	*/
+    
+    ?>
+    
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'idGroup',
+            
             'description',
-            'requestAutorization',
-            'idClassification',
-            'groupId',
+            //'requestAutorization',
+            [
+                'attribute' => 'idClassification',
+                'value' => 'classification.description',
+                'label' => Yii::t('app', 'Classification')
+            ],
+            [
+                'attribute' => 'groupId',
+                'value' => 'group.description',
+                'label' => Yii::t('app', 'Parent Group')
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

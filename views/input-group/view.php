@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\InputGroup */
 
-$this->title = $model->idGroup;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Input Groups'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,9 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idGroup',
             'description',
-            'idClassification',
+            [
+                'label' => Yii::t('app', 'Classification'),
+                'value' => $model->classification->description,
+            ],
         ],
     ]) ?>
 

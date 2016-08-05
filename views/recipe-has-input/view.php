@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\RecipeHasInput */
 
-$this->title = $model->idPreparedInput;
+$this->title = $model->recipe->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Recipe Has Inputs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -28,8 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idPreparedInput',
-            'idInput',
+            [
+                'label' => Yii::t('app', 'Recipe'),
+                'value' => $model->recipe->description,
+            ],
+            [
+                'label' => Yii::t('app', 'Input'),
+                'value' => $model->input->description,
+            ],
+            [
+                'label' => Yii::t('app', 'Unit'),
+                'value' => $model->input->unit->description,
+            ],
             'quantity',
         ],
     ]) ?>

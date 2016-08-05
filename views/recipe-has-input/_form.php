@@ -2,6 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\models\Recipe;
+use app\models\Input;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\RecipeHasInput */
@@ -11,10 +14,27 @@ use yii\widgets\ActiveForm;
 <div class="recipe-has-input-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'idPreparedInput')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'idInput')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'idPreparedInput')->dropDownList(
+        ArrayHelper::map(
+            Recipe::find()->all(),
+            'idPreparedInput',
+            'description'
+        ), array('prompt' => ""))->label(Yii::t('app', 'Recipe')) ?>
+    
+    <?= $form->field($model, 'idInput')->dropDownList(
+        ArrayHelper::map(
+            Input::find()->all(),
+            'idInput',
+            'description'
+        ), array(
+            'prompt' => ""/*,
+            'onchange' => '
+                $.get( "index.php?r=buchung/getprice&id="+$(this).val(), function( data ) {
+                  $( "#tblbuchung-preis" ).val( data );
+                });
+            '*/
+        ))->label(Yii::t('app', 'Input')) ?>
 
     <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 

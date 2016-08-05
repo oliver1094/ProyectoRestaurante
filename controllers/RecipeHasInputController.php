@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\RecipeHasInput;
 use app\models\RecipeHasInputSearch;
+use app\models\Input;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

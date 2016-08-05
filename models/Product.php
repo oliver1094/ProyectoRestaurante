@@ -64,7 +64,7 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUnit0()
+    public function getUnit()
     {
         return $this->hasOne(Unit::className(), ['idUnit' => 'idUnit']);
     }
@@ -72,7 +72,7 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdGroup0()
+    public function getGroup()
     {
         return $this->hasOne(ProductGroup::className(), ['idGroup' => 'idGroup']);
     }

@@ -51,7 +51,7 @@ class Unit extends \yii\db\ActiveRecord
             'idUnit' => Yii::t('app', 'Id Unit'),
             'description' => Yii::t('app', 'Description'),
             'quantity' => Yii::t('app', 'Quantity'),
-            'unitId' => Yii::t('app', 'Unit ID'),
+            'unitId' => Yii::t('app', 'Unit'),
         ];
     }
 

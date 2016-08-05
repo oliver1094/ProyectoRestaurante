@@ -23,11 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'idUnit',
+            
             'description',
             'quantity',
-            'unitId',
+            [
+                'attribute' => 'unitId',
+                'value' => 'unit.description',
+                'label' => Yii::t('app', 'Parent Unit')
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -59,7 +59,7 @@ class ProductGroup extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdClassification0()
+    public function getClassification()
     {
         return $this->hasOne(Classification::className(), ['idClassification' => 'idClassification']);
     }

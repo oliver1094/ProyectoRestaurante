@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Input */
 
-$this->title = $model->idInput;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Inputs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -24,21 +24,52 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    
+    <?php
+    
+    $group_name=NULL;
+	if(!empty ($model->idGroup)){
+		$group_name = $model->group->description;
+	}
+    
+    $unit_name=NULL;
+	if(!empty ($model->idUnit)){
+		$unit_name = $model->unit->description;
+	}
+    
+    $stockable = "";
+    if ($model->stockable ==0 )
+        $stockable = "No";
+    else
+        $stockable = "Sí";
+    
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idInput',
             'description',
+            [
+                'label' => Yii::t('app', 'Input Group'),
+                'value' => $group_name,
+            ],
+            [
+                'label' => Yii::t('app', 'Unit'),
+                'value' => $unit_name,
+            ],
             'lastCost',
             'averageCost',
-            'iva',
+            [
+                'label' => Yii::t('app', 'I.V.A.'),
+                'value' => $model->iva,
+            ],
             'costWithTax',
-            'stockable',
+            [
+                'label' => Yii::t('app', 'Stockable'),
+                'value' => $stockable,
+            ],
             'wasteRate',
             'lastCostWaste',
-            'idGroup',
-            'idUnit',
         ],
     ]) ?>
 

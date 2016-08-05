@@ -77,7 +77,7 @@ class Presentation extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdGroup0()
+    public function getGroup()
     {
         return $this->hasOne(InputGroup::className(), ['idGroup' => 'idGroup']);
     }
@@ -85,7 +85,7 @@ class Presentation extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdInput0()
+    public function getInput()
     {
         return $this->hasOne(Input::className(), ['idInput' => 'idInput']);
     }

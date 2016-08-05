@@ -24,8 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idPreparedInput',
-            'idInput',
+            [
+                'attribute' => 'idPreparedInput',
+                'value' => 'recipe.description',
+                'label' => Yii::t('app', 'Recipe')
+            ],
+            [
+                'attribute' => 'idInput',
+                'value' => 'input.description',
+                'label' => Yii::t('app', 'Input')
+            ],
             'quantity',
 
             ['class' => 'yii\grid\ActionColumn'],

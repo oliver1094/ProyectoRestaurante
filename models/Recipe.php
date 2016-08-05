@@ -66,7 +66,7 @@ class Recipe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdGroup0()
+    public function getGroup()
     {
         return $this->hasOne(InputGroup::className(), ['idGroup' => 'idGroup']);
     }
@@ -74,7 +74,7 @@ class Recipe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUnit0()
+    public function getUnit()
     {
         return $this->hasOne(Unit::className(), ['idUnit' => 'idUnit']);
     }
@@ -90,7 +90,7 @@ class Recipe extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdInputs()
+    public function getInputs()
     {
         return $this->hasMany(Input::className(), ['idInput' => 'idInput'])->viaTable('inp_preparedinput_has_inp_input', ['idPreparedInput' => 'idPreparedInput']);
     }

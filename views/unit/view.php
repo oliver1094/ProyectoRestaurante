@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Unit */
 
-$this->title = $model->idUnit;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Units'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -25,13 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    <?php
+    
+    $unit_name=NULL;
+	if(!empty ($model->unitId)){
+		$unit_name = $model->unit->description;
+	}
+    
+    ?>
+    
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idUnit',
             'description',
             'quantity',
-            'unitId',
+            [
+                'label' => Yii::t('app', 'Parent Unit'),
+                'value' => $unit_name,
+            ],
         ],
     ]) ?>
 

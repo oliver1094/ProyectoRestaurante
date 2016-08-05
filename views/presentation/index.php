@@ -23,12 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'idPresentation',
+            
             'description',
             'lastCost',
             'averageCost',
-            'iva',
+            [
+                'attribute' => 'iva',
+                'value' => 'iva',
+                'label' => Yii::t('app', 'I.V.A.')
+            ],
             // 'costWithTaxes',
             // 'provider',
             // 'performance',

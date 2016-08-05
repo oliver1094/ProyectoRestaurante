@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Presentation */
 
-$this->title = $model->idPresentation;
+$this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Presentations'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -24,15 +24,39 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    
+    <?php
+    
+    $group_name=NULL;
+	if(!empty ($model->idGroup)){
+		$group_name = $model->group->description;
+	}
+    
+    $input_name=NULL;
+	if(!empty ($model->idInput)){
+		$input_name = $model->input->description;
+	}
+    
+    ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idPresentation',
             'description',
+            [
+                'label' => Yii::t('app', 'Input Group'),
+                'value' => $group_name,
+            ],
+            [
+                'label' => Yii::t('app', 'Input'),
+                'value' => $input_name,
+            ],
             'lastCost',
             'averageCost',
-            'iva',
+            [
+                'label' => Yii::t('app', 'I.V.A.'),
+                'value' => $model->iva,
+            ],
             'costWithTaxes',
             'provider',
             'performance',
@@ -40,8 +64,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'location',
             'minimumStock',
             'maximumStock',
-            'idGroup',
-            'idInput',
         ],
     ]) ?>
 
