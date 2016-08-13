@@ -5,9 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\RecipeHasInput */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-    'modelClass' => 'Recipe Has Input',
-]) . $model->recipe->description;
+$this->title = Yii::t('app', 'Update Input from Recipe: ') . $model->recipe->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Recipe Has Inputs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->idPreparedInput, 'url' => ['view', 'idPreparedInput' => $model->idPreparedInput, 'idInput' => $model->idInput]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');

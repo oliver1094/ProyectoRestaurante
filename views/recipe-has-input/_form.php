@@ -20,7 +20,7 @@ use app\models\Input;
             Recipe::find()->all(),
             'idPreparedInput',
             'description'
-        ), array('prompt' => ""))->label(Yii::t('app', 'Recipe')) ?>
+        ), array('prompt' => "", 'disabled' => "true"))->label(Yii::t('app', 'Recipe')) ?>
     
     <?= $form->field($model, 'idInput')->dropDownList(
         ArrayHelper::map(
@@ -28,13 +28,7 @@ use app\models\Input;
             'idInput',
             'description'
         ), array(
-            'prompt' => ""/*,
-            'onchange' => '
-                $.get( "index.php?r=buchung/getprice&id="+$(this).val(), function( data ) {
-                  $( "#tblbuchung-preis" ).val( data );
-                });
-            '*/
-        ))->label(Yii::t('app', 'Input')) ?>
+            'prompt' => ""))->label(Yii::t('app', 'Input')) ?>
 
     <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 

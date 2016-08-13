@@ -34,7 +34,7 @@ class RecipeHasInputController extends Controller
      * Lists all RecipeHasInput models.
      * @return mixed
      */
-    public function actionIndex()
+    /*public function actionIndex()
     {
         $searchModel = new RecipeHasInputSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -43,7 +43,7 @@ class RecipeHasInputController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
+    }*/
 
     /**
      * Displays a single RecipeHasInput model.
@@ -51,24 +51,26 @@ class RecipeHasInputController extends Controller
      * @param string $idInput
      * @return mixed
      */
-    public function actionView($idPreparedInput, $idInput)
+    /*public function actionView($idPreparedInput, $idInput)
     {
         return $this->render('view', [
             'model' => $this->findModel($idPreparedInput, $idInput),
         ]);
-    }
+    }*/
 
     /**
      * Creates a new RecipeHasInput model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($idRecipe)
     {
         $model = new RecipeHasInput();
+        $model->idPreparedInput = $idRecipe;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idPreparedInput' => $model->idPreparedInput, 'idInput' => $model->idInput]);
+            //return $this->redirect(['view', 'idPreparedInput' => $model->idPreparedInput, 'idInput' => $model->idInput]);
+            return $this->redirect(['./recipe/view', 'id' => $model->idPreparedInput]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -88,7 +90,8 @@ class RecipeHasInputController extends Controller
         $model = $this->findModel($idPreparedInput, $idInput);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idPreparedInput' => $model->idPreparedInput, 'idInput' => $model->idInput]);
+            //return $this->redirect(['view', 'idPreparedInput' => $model->idPreparedInput, 'idInput' => $model->idInput]);
+            return $this->redirect(['./recipe/view', 'id' => $model->idPreparedInput]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,7 +110,7 @@ class RecipeHasInputController extends Controller
     {
         $this->findModel($idPreparedInput, $idInput)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['./recipe/view', 'id' => $idPreparedInput]);
     }
 
     /**

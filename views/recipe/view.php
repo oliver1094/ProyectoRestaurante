@@ -2,9 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Recipe */
+/* @var $recipe_sInputs app\models\RecipeHasInput */
 
 $this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Recipes'), 'url' => ['index']];
@@ -24,6 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
+    
+    <?php
+        if($model->picture != NULL)
+            echo "<center><a href=\"../uploads/recipe/$model->picture\"><img style=\"width:30%\" src=\"../uploads/recipe/$model->picture\" class=\"img-responsive\"></a></center><p>";
+    ?>
     
     <?php
     
@@ -55,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => Yii::t('app', 'Recipe Performance'),
-                'value' => 'performanceRecipe',
+                'value' => $model->performanceRecipe,
             ],
             [
                 'label' => Yii::t('app', 'Performance Unit'),
@@ -69,5 +76,59 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]) ?>
+    
+    <h2>Inputs:</h2>
+    <p>
+        <?= Html::a(Yii::t('app', 'Assign Input'), ['./recipe-has-input/create', 'idRecipe' => $model->idPreparedInput], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'idInput',
+                'value' => 'input.description',
+                'label' => Yii::t('app', 'Input')
+            ],
+            'quantity',
+            [
+                'attribute' => 'idUnit',
+                'value' => 'input.unit.description',
+                'label' => Yii::t('app', 'Input')
+            ],
+            //['class' => 'yii\grid\ActionColumn']
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'buttons' => [
+                    'update' => function ($url, $recipe_sInputs, $key) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-pencil"></span>',
+                            ['recipe-has-input/update', 'idPreparedInput' => $recipe_sInputs->idPreparedInput, 'idInput' => $recipe_sInputs->idInput], 
+                            [
+                                'title' => 'Update',
+                                'aria-label' => Yii::t('yii', 'Update'),
+                                'data-pjax' => '0',
+                            ]
+                        );
+                    },
+                    'delete' => function ($url, $recipe_sInputs, $key) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-trash"></span>',
+                            ['recipe-has-input/delete', 'idPreparedInput' => $recipe_sInputs->idPreparedInput, 'idInput' => $recipe_sInputs->idInput], 
+                            [
+                                'title' => Yii::t('yii', 'Delete'),
+                                'aria-label' => Yii::t('yii', 'Delete'),
+                                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                'data-method' => 'post',
+                                'data-pjax' => '0',
+                            ]
+                        );
+                    },
+                ]
+            ],
+        ],
+    ]); ?>
 
 </div>

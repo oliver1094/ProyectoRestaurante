@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\RecipeHasInput */
 
-$this->title = Yii::t('app', 'Create Recipe Has Input');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Recipe Has Inputs'), 'url' => ['index']];
+$this->title = Yii::t('app', 'Assign Input to Recipe: '.$model->recipe->description);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Recipe'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="recipe-has-input-create">

@@ -23,7 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            
+            [
+              'attribute' => 'picture',
+              'format' => 'html',
+              'label' => 'Picture',
+              'value' => function ($data) {
+                return Html::img('../uploads/recipe/' . $data['picture'],
+                ['width' => '100px']);
+              },
+            ],
             'description',
             [
                 'attribute' => 'performanceRecipe',
@@ -35,8 +43,24 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'investable',
             // 'idGroup',
             // 'idUnit',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {assign} {delete}',
+                'buttons' => [
+                    'assign' => function ($url, $model, $key) {
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-arrow-down"></span>',
+                            ['recipe-has-input/create', 'idRecipe' => $model->idPreparedInput], 
+                            [
+                                'title' => 'Assign',
+                                'aria-label' => Yii::t('yii', 'Assign'),
+                                'data-pjax' => '0',
+                            ]
+                        );
+                    },
+                ]
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

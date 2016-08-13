@@ -17,6 +17,13 @@ use app\models\Unit;
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
     
+    <?php
+        if($model->picture != NULL)
+            echo "<img style=\"width:10%\" src=\"../uploads/recipe/$model->picture\" class=\"img-responsive\"><p>";
+    ?>
+    
+    <?= $form->field($model, 'file_picture')->fileInput() ?>
+    
     <?= $form->field($model, 'idGroup')->dropDownList(
         ArrayHelper::map(
             InputGroup::find()->all(),

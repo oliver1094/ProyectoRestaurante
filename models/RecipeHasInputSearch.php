@@ -41,7 +41,7 @@ class RecipeHasInputSearch extends RecipeHasInput
      */
     public function search($params)
     {
-        $query = RecipeHasInput::find();
+        $query = RecipeHasInput::find()->where('idPreparedInput ='. $params['id']);
 
         // add conditions that should always apply here
 
