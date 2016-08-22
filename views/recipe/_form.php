@@ -18,11 +18,18 @@ use app\models\Unit;
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
     
     <?php
-        if($model->picture != NULL)
-            echo "<img style=\"width:10%\" src=\"../uploads/recipe/$model->picture\" class=\"img-responsive\"><p>";
+        if($model->picture1 != NULL)
+            echo "<img style=\"width:10%\" src=\"../uploads/recipe/$model->picture1\" class=\"img-responsive\"><p>";
     ?>
     
-    <?= $form->field($model, 'file_picture')->fileInput() ?>
+    <?= $form->field($model, 'file_picture1')->fileInput()->label('Picture 1') ?>
+    
+    <?php
+        if($model->picture2 != NULL)
+            echo "<img style=\"width:10%\" src=\"../uploads/recipe/$model->picture2\" class=\"img-responsive\"><p>";
+    ?>
+    
+    <?= $form->field($model, 'file_picture2')->fileInput()->label('Picture 2') ?>
     
     <?= $form->field($model, 'idGroup')->dropDownList(
         ArrayHelper::map(

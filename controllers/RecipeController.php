@@ -77,7 +77,8 @@ class RecipeController extends Controller
         $model = new Recipe(['scenario'=>'Create']);
         
         if ($model->load(Yii::$app->request->post())) {
-            $model->file_picture = UploadedFile::getInstance($model,'file_picture');
+            $model->file_picture1 = UploadedFile::getInstance($model,'file_picture1');
+            $model->file_picture2 = UploadedFile::getInstance($model,'file_picture2');
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->idPreparedInput]);
             }
@@ -97,10 +98,15 @@ class RecipeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'Update';
 
         if ($model->load(Yii::$app->request->post())) {
-            if(UploadedFile::getInstance($model,'file_picture')!=NULL)
-                $model->file_picture = UploadedFile::getInstance($model,'file_picture');
+            if(UploadedFile::getInstance($model,'file_picture1')!=NULL){
+                $model->file_picture1 = UploadedFile::getInstance($model,'file_picture1');
+            }
+            if(UploadedFile::getInstance($model,'file_picture2')!=NULL){
+                $model->file_picture2 = UploadedFile::getInstance($model,'file_picture2');
+            }
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->idPreparedInput]);
             }

@@ -27,10 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
     
+    <p>
     <?php
-        if($model->picture != NULL)
-            echo "<center><a href=\"../uploads/recipe/$model->picture\"><img style=\"width:30%\" src=\"../uploads/recipe/$model->picture\" class=\"img-responsive\"></a></center><p>";
+        if($model->picture1 != NULL)
+            echo "<img style=\"width:30%; float:left\" src=\"../uploads/recipe/$model->picture1\" class=\"img-responsive\">";
+        if($model->picture2 != NULL)
+            echo "<img style=\"width:30%; float:left\" src=\"../uploads/recipe/$model->picture2\" class=\"img-responsive\">";
     ?>
+    
+    </p>
     
     <?php
     

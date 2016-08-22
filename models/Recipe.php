@@ -15,7 +15,8 @@ use Yii;
  * @property integer $investable
  * @property string $idGroup
  * @property string $idUnit
- * @property string $picture
+ * @property string $picture1
+ * @property string $picture2
  *
  * @property InpGroup $Group
  * @property InpUnit $Unit
@@ -24,7 +25,8 @@ use Yii;
  */
 class Recipe extends \yii\db\ActiveRecord
 {
-    public $file_picture;
+    public $file_picture1;
+    public $file_picture2;
     /**
      * @inheritdoc
      */
@@ -43,11 +45,15 @@ class Recipe extends \yii\db\ActiveRecord
             [['performanceRecipe', 'unitCost', 'averageCost'], 'number'],
             [['investable', 'idGroup', 'idUnit'], 'integer'],
             [['description'], 'string', 'max' => 255],
-            [['picture'], 'string', 'max' => 100],
+            [['picture1', 'picture2'], 'string', 'max' => 100],
             [['idGroup'], 'exist', 'skipOnError' => true, 'targetClass' => InputGroup::className(), 'targetAttribute' => ['idGroup' => 'idGroup']],
             [['idUnit'], 'exist', 'skipOnError' => true, 'targetClass' => Unit::className(), 'targetAttribute' => ['idUnit' => 'idUnit']],
-            [['filename'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Create'],
-            [['file_picture'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Update'],
+            
+            [['file_picture1'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Create'],
+            [['file_picture1'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Update'],
+            
+            [['file_picture2'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Create'],
+            [['file_picture2'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg, bmp', 'on' => 'Update'],
         ];
     }
 
@@ -65,7 +71,8 @@ class Recipe extends \yii\db\ActiveRecord
             'investable' => Yii::t('app', 'Investable'),
             'idGroup' => Yii::t('app', 'Id Group'),
             'idUnit' => Yii::t('app', 'Id Unit'),
-            'picture' => Yii::t('app', 'Recipe Picture')
+            'picture1' => Yii::t('app', 'Recipe Picture 1'),
+            'picture2' => Yii::t('app', 'Recipe Picture 2')
         ];
     }
 
@@ -106,11 +113,18 @@ class Recipe extends \yii\db\ActiveRecord
         if(parent::beforeSave($insert))
         {
             // PAYMENT_RECEIPT
-            if( !empty($this->file_picture) )
+            if( !empty($this->file_picture1) )
             {
-                $fileNameRecipePicture = uniqid() . '.' . $this->file_picture->extension;
-                $this->file_picture->saveAs('uploads/recipe/' . $fileNameRecipePicture);
-                $this->picture = $fileNameRecipePicture;
+                $fileNameRecipePicture1 = uniqid() . '.' . $this->file_picture1->extension;
+                $this->file_picture1->saveAs('uploads/recipe/' . $fileNameRecipePicture1);
+                $this->picture1 = $fileNameRecipePicture1;
+            }
+            
+            if( !empty($this->file_picture2) )
+            {
+                $fileNameRecipePicture2 = uniqid() . '.' . $this->file_picture2->extension;
+                $this->file_picture2->saveAs('uploads/recipe/' . $fileNameRecipePicture2);
+                $this->picture2 = $fileNameRecipePicture2;
             }
 
             return true;
